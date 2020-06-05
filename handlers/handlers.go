@@ -15,6 +15,8 @@ import (
 func Manejadores() {
 	router := mux.NewRouter()
 	router.HandleFunc("/registro", middle.ChequeoDB(routers.Registro)).Methods("POST")
+	router.HandleFunc("/login", middle.ChequeoDB(routers.Login)).Methods("POST")
+	router.HandleFunc("/verperfil", middle.ChequeoDB(middle.ChequeoDB(routers.VerPerfil))).Methods("POST")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
