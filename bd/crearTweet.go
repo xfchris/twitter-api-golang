@@ -10,7 +10,7 @@ import (
 )
 
 //InsertarTweet inserta un tweet en el registro
-func InsertarTweet(t models.Tweet) (string, bool, error) {
+func InsertarTweet(t models.Tweet) (primitive.ObjectID, bool, error) {
 	ctx, cancel := context.WithTimeout(context.Background(), 15*time.Second)
 	defer cancel()
 
@@ -25,9 +25,9 @@ func InsertarTweet(t models.Tweet) (string, bool, error) {
 
 	result, err := col.InsertOne(ctx, registro)
 	if err != nil {
-		return "", false, err
+		return primitive.NilObjectID, false, err
 	}
 
 	objID, _ := result.InsertedID.(primitive.ObjectID)
-	return objID.String(), true, nil
+	return objID, true, nil
 }
