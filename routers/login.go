@@ -48,7 +48,7 @@ func Login(w http.ResponseWriter, r *http.Request) {
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(resp)
 
-	crearCookie(w, jwtKey)
+	//crearCookie(w, jwtKey)
 }
 
 func crearCookie(w http.ResponseWriter, jwtKey string) {

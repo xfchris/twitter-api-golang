@@ -6,7 +6,8 @@ import (
 
 	"github.com/xfchris/gotter/bd"
 )
-//VerPerfil Muestra informacion del usuario 
+
+//VerPerfil Muestra informacion del usuario
 func VerPerfil(w http.ResponseWriter, r *http.Request) {
 	ID := r.URL.Query().Get("id")
 
@@ -22,7 +23,7 @@ func VerPerfil(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	w.Header().Set("Context-Type", "application/json")
+	w.Header().Set("Content-Type", "application/json")
 	w.WriteHeader(http.StatusCreated)
 	json.NewEncoder(w).Encode(perfil)
 }

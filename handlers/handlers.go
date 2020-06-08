@@ -14,9 +14,14 @@ import (
 //Manejadores son las rutas
 func Manejadores() {
 	router := mux.NewRouter()
+	router.HandleFunc("/", routers.Index).Methods("GET")
+
 	router.HandleFunc("/registro", middle.ChequeoDB(routers.Registro)).Methods("POST")
 	router.HandleFunc("/login", middle.ChequeoDB(routers.Login)).Methods("POST")
-	router.HandleFunc("/verperfil", middle.ChequeoDB(middle.ChequeoDB(routers.VerPerfil))).Methods("POST")
+	router.HandleFunc("/ver-perfil", middle.ChequeoDB(middle.ValidoJWT(routers.VerPerfil))).Methods("GET")
+	router.HandleFunc("/editar-perfil", middle.ChequeoDB(middle.ValidoJWT(routers.ModificarPerfil))).Methods("PUT")
+	router.HandleFunc("/crear-tweet", middle.ChequeoDB(middle.ValidoJWT(routers.CrearTweet))).Methods("POST")
+	router.HandleFunc("/leer-tweet", middle.ChequeoDB(middle.ValidoJWT(routers.LeerTweets))).Methods("GET")
 
 	PORT := os.Getenv("PORT")
 	if PORT == "" {
