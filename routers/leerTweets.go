@@ -16,12 +16,12 @@ func LeerTweets(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
-	if len(r.URL.Query().Get("pagina")) < 1 {
+	if len(r.URL.Query().Get("page")) < 1 {
 		http.Error(w, "Debe enviar la pagina", 400)
 		return
 	}
 
-	pagina, err := strconv.Atoi(r.URL.Query().Get("pagina"))
+	pagina, err := strconv.Atoi(r.URL.Query().Get("page"))
 	if err != nil {
 		http.Error(w, "Debe enviar una pagina con un numero mayor a 0", 400)
 		return

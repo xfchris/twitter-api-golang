@@ -8,10 +8,10 @@ import (
 
 //Usuario es un modelo de la tabla usuarios
 type Usuario struct {
-	ID              primitive.ObjectID `bson:"_id,omitempty" json:"id"`
+	ID              primitive.ObjectID `bson:"_id,omitempty" json:"id,omitempty"`
 	Nombres         string             `bson:"nombres" json:"nombres,omitempty"`
 	Apellidos       string             `bson:"apellidos" json:"apellidos,omitempty"`
-	FechaNacimiento time.Time          `bson:"fechaNacimiento" json:"fechaNacimiento,omitempty"`
+	FechaNacimiento time.Time          `bson:"fechaNacimiento,omitempty" json:"fechaNacimiento,omitempty"`
 	Email           string             `bson:"email" json:"email"`
 	Password        string             `bson:"password" json:"password,omitempty"`
 	Avatar          string             `bson:"avatar" json:"avatar,omitempty"`
