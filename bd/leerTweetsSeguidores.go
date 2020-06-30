@@ -34,29 +34,30 @@ func LeerTweetsSeguidores(ID string, page int) ([]*models.TweetsSeguidores, bool
 	condiciones = append(condiciones, bson.M{"$unwind": "$tweet"})
 
 	//Mucho a muchos con usuarios
-	condiciones = append(condiciones, bson.M{
-		"$addFields": bson.M{"usuario_oid": bson.M{"$toObjectId": "$usuarioseguido_id"}},
-	})
-	condiciones = append(condiciones, bson.M{
-		"$lookup": bson.M{
-			"from":         "usuarios",
-			"localField":   "usuario_oid",
-			"foreignField": "_id",
-			"as":           "usuario",
-		},
-	})
+	// condiciones = append(condiciones, bson.M{
+	// 	"$addFields": bson.M{"usuario_oid": bson.M{"$toObjectId": "$usuarioseguido_id"}},
+	// })
+	// condiciones = append(condiciones, bson.M{
+	// 	"$lookup": bson.M{
+	// 		"from":         "usuarios",
+	// 		"localField":   "usuario_oid",
+	// 		"foreignField": "_id",
+	// 		"as":           "usuario",
+	// 	},
+	// })
 	//Fin mucho a muchos con usuarios
+	
 	//Oculto algunos campos
-	condiciones = append(condiciones, bson.M{
-		"$project": bson.M{
-			"usuario_id":              0,
-			"usuario.password":        0,
-			"usuario.sitioWeb":        0,
-			"usuario.biografia":       0,
-			"usuario._id":             0,
-			"tweets.user_id":          0,
-		},
-	})
+	// condiciones = append(condiciones, bson.M{
+	// 	"$project": bson.M{
+	// 		"usuario_id":              0,
+	// 		"usuario.password":        0,
+	// 		"usuario.sitioWeb":        0,
+	// 		"usuario.biografia":       0,
+	// 		"usuario._id":             0,
+	// 		"tweets.user_id":          0,
+	// 	},
+	// })
 
 	condiciones = append(condiciones, bson.M{"$sort": bson.M{"tweets.fecha": -1}})
 	condiciones = append(condiciones, bson.M{"$skip": skip})
